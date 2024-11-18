@@ -24,7 +24,11 @@ class ProfileFragment : Fragment() {
 
     private lateinit var profileImageView: ImageView
     private lateinit var usernameTextView: TextView
+    private lateinit var backlogWantToPlayTextView: TextView
+    private lateinit var backlogPlayingTextView: TextView
     private lateinit var backlogPlayedTextView: TextView
+    private lateinit var backlogCompletedTextView: TextView
+    private lateinit var backlogCompleted100TextView: TextView
     private lateinit var progressBar: ProgressBar
 
     override fun onCreateView(
@@ -34,7 +38,11 @@ class ProfileFragment : Fragment() {
         val binding = FragmentProfileBinding.inflate(inflater, container, false)
         profileImageView = binding.profileImageView
         usernameTextView = binding.usernameTextView
+        backlogWantToPlayTextView = binding.backlogWantToPlayTextView
+        backlogPlayingTextView = binding.backlogPlayingTextView
         backlogPlayedTextView = binding.backlogPlayedTextView
+        backlogCompletedTextView = binding.backlogCompletedTextView
+        backlogCompleted100TextView = binding.backlogCompleted100TextView
         progressBar = binding.progressBar
 
         val token = "Bearer ${PrefsManager.getAccessToken(requireContext())}"
@@ -63,7 +71,11 @@ class ProfileFragment : Fragment() {
                             .load(it.image)
                             .into(profileImageView)
 
+                        backlogWantToPlayTextView.text = it.backlog_want_to_play.joinToString(", ")
+                        backlogPlayingTextView.text = it.backlog_playing.joinToString(", ")
                         backlogPlayedTextView.text = it.backlog_played.joinToString(", ")
+                        backlogCompletedTextView.text = it.backlog_completed.joinToString(", ")
+                        backlogCompleted100TextView.text = it.backlog_completed_100.joinToString(", ")
                     }
                 } else {
                     Toast.makeText(context, "Failed to load profile", Toast.LENGTH_SHORT).show()

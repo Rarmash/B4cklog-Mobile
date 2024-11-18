@@ -1,38 +1,47 @@
 package com.rarmash.b4cklog.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.Glide
 import com.rarmash.b4cklog.R
+import com.rarmash.b4cklog.databinding.ItemGameBinding
 import com.rarmash.b4cklog.models.Game
 
-class GameAdapter(private val games: List<Game>) : RecyclerView.Adapter<GameAdapter.GameViewHolder>() {
-
-    inner class GameViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val title: TextView = view.findViewById(R.id.gameTitle)
-        val image: ImageView = view.findViewById(R.id.gameImage)
-        val summary: TextView = view.findViewById(R.id.gameSummary)
-        val platforms: TextView = view.findViewById(R.id.gamePlatforms)
-    }
+class GameAdapter : PagingDataAdapter<Game, GameAdapter.GameViewHolder>(GameDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_game, parent, false)
-        return GameViewHolder(view)
+        val binding = ItemGameBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return GameViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: GameViewHolder, position: Int) {
-        val game = games[position]
-        holder.title.text = game.name
-        holder.summary.text = game.summary
-
-        Glide.with(holder.image.context).load(game.cover).into(holder.image)
-
-        holder.platforms.text = game.platforms.joinToString { it.name }
+        val game = getItem(position)
+        if (game != null) {
+            holder.bind(game)
+        }
     }
 
-    override fun getItemCount(): Int = games.size
+    inner class GameViewHolder(private val binding: ItemGameBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(game: Game) {
+            Glide.with(binding.root.context).load(game.cover).placeholder(R.drawable.default_cover).error(R.drawable.default_cover).into(binding.gameImage)
+        }
+    }
+
+    class GameDiffCallback : DiffUtil.ItemCallback<Game>() {
+        override fun areItemsTheSame(oldItem: Game, newItem: Game): Boolean {
+            return oldItem.igdb_id == newItem.igdb_id
+        }
+
+        override fun areContentsTheSame(oldItem: Game, newItem: Game): Boolean {
+            return oldItem == newItem
+        }
+    }
 }

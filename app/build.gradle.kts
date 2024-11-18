@@ -55,5 +55,7 @@ dependencies {
     implementation(libs.okhttp)
     implementation(libs.androidx.preference.ktx)
     implementation(libs.glide)
+    implementation(libs.androidx.recyclerview.v121)
+    implementation(libs.androidx.paging.runtime)
     kapt(libs.compiler)
 }

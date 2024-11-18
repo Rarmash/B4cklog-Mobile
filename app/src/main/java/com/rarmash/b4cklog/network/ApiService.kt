@@ -24,5 +24,8 @@ interface ApiService {
     ): Call<ProfileResponse>
 
     @GET("api/games/?format=json")
-    suspend fun getGames(@Query("page") page: Int): Response<List<Game>>
+    suspend fun getGames(
+        @Query("page") page: Int,
+        @Query("page_size") pageSize: Int = 20
+    ): Response<GameListResponse>
 }
