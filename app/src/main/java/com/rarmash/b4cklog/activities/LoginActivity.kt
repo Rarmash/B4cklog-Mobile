@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import com.rarmash.b4cklog.R
 import com.rarmash.b4cklog.auth.LoginRequest
-import com.rarmash.b4cklog.auth.LoginResponse
+import com.rarmash.b4cklog.responses.LoginResponse
 import com.rarmash.b4cklog.auth.PrefsManager
 import com.rarmash.b4cklog.network.RetrofitClient
 import retrofit2.Call

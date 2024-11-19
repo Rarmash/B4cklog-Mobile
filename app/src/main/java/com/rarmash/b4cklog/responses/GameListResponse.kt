@@ -1,4 +1,4 @@
-package com.rarmash.b4cklog.network
+package com.rarmash.b4cklog.responses
 
 import com.rarmash.b4cklog.models.Game
 

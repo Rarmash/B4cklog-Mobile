@@ -1,0 +1,37 @@
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.rarmash.b4cklog.fragments.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_gameDetailFragment"
+            app:destination="@id/gameDetailFragment">
+            <argument
+                android:name="igdb_id"
+                app:argType="integer" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/gameDetailFragment"
+        android:name="com.rarmash.b4cklog.fragments.GameDetailFragment"
+        android:label="Game Detail"
+        tools:layout="@layout/fragment_game_detail" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.rarmash.b4cklog.fragments.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.rarmash.b4cklog.fragments.SettingsFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_settings" />
+</navigation>

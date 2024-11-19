@@ -1,7 +1,6 @@
 package com.rarmash.b4cklog.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,10 +10,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
-import com.rarmash.b4cklog.R
 import com.rarmash.b4cklog.auth.PrefsManager
 import com.rarmash.b4cklog.databinding.FragmentProfileBinding
-import com.rarmash.b4cklog.network.ProfileResponse
+import com.rarmash.b4cklog.responses.ProfileResponse
 import com.rarmash.b4cklog.network.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback

@@ -1,4 +1,4 @@
-package com.rarmash.b4cklog.network
+package com.rarmash.b4cklog.responses
 
 data class ProfileResponse(
     val user: String,

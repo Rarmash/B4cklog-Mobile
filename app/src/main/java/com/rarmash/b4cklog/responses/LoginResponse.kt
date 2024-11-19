@@ -1,4 +1,4 @@
-package com.rarmash.b4cklog.auth
+package com.rarmash.b4cklog.responses
 
 data class LoginResponse(
     val access: String,
