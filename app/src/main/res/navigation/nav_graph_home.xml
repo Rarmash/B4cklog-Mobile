@@ -10,7 +10,9 @@
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_gameDetailFragment"
-            app:destination="@id/gameDetailFragment">
+            app:destination="@id/gameDetailFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" >
             <argument
                 android:name="igdb_id"
                 app:argType="integer" />
@@ -22,16 +24,4 @@
         android:name="com.rarmash.b4cklog.fragments.GameDetailFragment"
         android:label="Game Detail"
         tools:layout="@layout/fragment_game_detail" />
-
-    <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.rarmash.b4cklog.fragments.ProfileFragment"
-        android:label="Profile"
-        tools:layout="@layout/fragment_profile" />
-
-    <fragment
-        android:id="@+id/settingsFragment"
-        android:name="com.rarmash.b4cklog.fragments.SettingsFragment"
-        android:label="Profile"
-        tools:layout="@layout/fragment_settings" />
 </navigation>

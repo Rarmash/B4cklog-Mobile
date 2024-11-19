@@ -1,4 +1,4 @@
-package com.rarmash.b4cklog
+package com.rarmash.b4cklog.app
 
 import android.app.Application
 import com.rarmash.b4cklog.network.RetrofitClient
