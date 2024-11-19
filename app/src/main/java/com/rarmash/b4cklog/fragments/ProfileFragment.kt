@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.rarmash.b4cklog.R
 import com.rarmash.b4cklog.auth.PrefsManager
 import com.rarmash.b4cklog.databinding.FragmentProfileBinding
 import com.rarmash.b4cklog.responses.ProfileResponse
@@ -67,6 +68,8 @@ class ProfileFragment : Fragment() {
                         usernameTextView.text = it.user
                         Glide.with(this@ProfileFragment)
                             .load(it.image)
+                            .placeholder(R.drawable.default_avatar)
+                            .error(R.drawable.default_avatar)
                             .into(profileImageView)
 
                         backlogWantToPlayTextView.text = it.backlog_want_to_play.joinToString(", ")
