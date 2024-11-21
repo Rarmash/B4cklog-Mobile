@@ -32,6 +32,10 @@ class MainActivity : AppCompatActivity() {
                     showFragment(R.id.nav_host_fragment_home)
                     true
                 }
+                R.id.nav_search -> {
+                    showFragment(R.id.nav_host_fragment_search)
+                    true
+                }
                 R.id.nav_profile -> {
                     showFragment(R.id.nav_host_fragment_profile)
                     true
@@ -47,6 +51,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun showFragment(fragmentId: Int) {
         findViewById<View>(R.id.nav_host_fragment_home).visibility = View.GONE
+        findViewById<View>(R.id.nav_host_fragment_search).visibility = View.GONE
         findViewById<View>(R.id.nav_host_fragment_profile).visibility = View.GONE
         findViewById<View>(R.id.nav_host_fragment_settings).visibility = View.GONE
 
@@ -54,12 +59,16 @@ class MainActivity : AppCompatActivity() {
 
         val navController = when (fragmentId) {
             R.id.nav_host_fragment_home -> runCatching { findNavController(R.id.nav_host_fragment_home) }.getOrNull()
+            R.id.nav_host_fragment_search -> runCatching { findNavController(R.id.nav_host_fragment_search) }.getOrNull()
             R.id.nav_host_fragment_profile -> runCatching { findNavController(R.id.nav_host_fragment_profile) }.getOrNull()
             R.id.nav_host_fragment_settings -> runCatching { findNavController(R.id.nav_host_fragment_settings) }.getOrNull()
             else -> null
         }
 
         if (fragmentId == R.id.nav_host_fragment_home && lastSelectedFragmentId == fragmentId) {
+            navController?.popBackStack(navController.graph.startDestinationId, false)
+        }
+        if (fragmentId == R.id.nav_host_fragment_search && lastSelectedFragmentId == fragmentId) {
             navController?.popBackStack(navController.graph.startDestinationId, false)
         }
 
@@ -70,6 +79,8 @@ class MainActivity : AppCompatActivity() {
         val currentNavController = when {
             findViewById<View>(R.id.nav_host_fragment_home).visibility == View.VISIBLE ->
                 findNavController(R.id.nav_host_fragment_home)
+            findViewById<View>(R.id.nav_host_fragment_search).visibility == View.VISIBLE ->
+                findNavController(R.id.nav_host_fragment_search)
             findViewById<View>(R.id.nav_host_fragment_profile).visibility == View.VISIBLE ->
                 findNavController(R.id.nav_host_fragment_profile)
             findViewById<View>(R.id.nav_host_fragment_settings).visibility == View.VISIBLE ->

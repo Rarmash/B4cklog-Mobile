@@ -37,4 +37,11 @@ interface ApiService {
     suspend fun getGameDetails(
         @Path("igdb_id") igdb_id: Int
     ): Response<Game>
+
+    @GET("api/search/")
+    suspend fun searchGames(
+        @Query("q") query: String,
+        @Query("page") page: Int,
+        @Query("page_size") pageSize: Int = 20
+    ): Response<GameListResponse>
 }

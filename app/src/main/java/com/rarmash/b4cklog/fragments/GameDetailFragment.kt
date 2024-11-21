@@ -69,8 +69,8 @@ class GameDetailFragment : Fragment() {
     private fun updateUIWithGameDetails(gameDetails: Game) {
         gameTitle.text = gameDetails.name
         gameSummary.text = gameDetails.summary
-        gameReleaseDate.text = gameDetails.first_release_date ?: "Unknown"
-        gamePlatforms.text = gameDetails.platforms.joinToString(", ") { it.name }
+        gameReleaseDate.text = "Released on " + (gameDetails.first_release_date ?: "Unknown")
+        gamePlatforms.text = "Platforms: " + gameDetails.platforms.joinToString(", ") { it.name }
 
         Glide.with(requireContext())
             .load(gameDetails.cover)
