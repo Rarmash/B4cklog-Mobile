@@ -1,13 +1,16 @@
 package com.rarmash.b4cklog.activities
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.rarmash.b4cklog.R
 import com.rarmash.b4cklog.auth.PrefsManager
+import com.google.android.material.color.DynamicColors
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,6 +18,10 @@ class MainActivity : AppCompatActivity() {
     private var lastSelectedFragmentId: Int = R.id.nav_host_fragment_home
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        if (Build.VERSION.SDK_INT >= 31) {
+            DynamicColors.applyToActivitiesIfAvailable(application)
+        }
+
         super.onCreate(savedInstanceState)
 
         val accessToken = PrefsManager.getAccessToken(this)
@@ -47,6 +54,22 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+
+        bottomNavigationView.viewTreeObserver.addOnGlobalLayoutListener {
+            val bottomNavHeight = bottomNavigationView.height
+
+            updateFragmentBottomMargin(R.id.nav_host_fragment_home, bottomNavHeight)
+            updateFragmentBottomMargin(R.id.nav_host_fragment_search, bottomNavHeight)
+            updateFragmentBottomMargin(R.id.nav_host_fragment_profile, bottomNavHeight)
+            updateFragmentBottomMargin(R.id.nav_host_fragment_settings, bottomNavHeight)
+        }
+    }
+
+    private fun updateFragmentBottomMargin(fragmentId: Int, bottomNavHeight: Int) {
+        val fragmentContainer = findViewById<View>(fragmentId)
+        val layoutParams = fragmentContainer.layoutParams as ViewGroup.MarginLayoutParams
+        layoutParams.bottomMargin = bottomNavHeight
+        fragmentContainer.layoutParams = layoutParams
     }
 
     private fun showFragment(fragmentId: Int) {

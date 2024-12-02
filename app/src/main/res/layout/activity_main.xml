@@ -47,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="?android:attr/windowBackground"
+            style="@style/Widget.B4cklog.BottomNavigationView"
             app:menu="@menu/bottom_nav_menu" />
     </RelativeLayout>
 </androidx.drawerlayout.widget.DrawerLayout>

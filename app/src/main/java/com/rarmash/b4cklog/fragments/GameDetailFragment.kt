@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -23,6 +24,7 @@ class GameDetailFragment : Fragment() {
     private lateinit var gameCover: ImageView
     private lateinit var gameReleaseDate: TextView
     private lateinit var gamePlatforms: TextView
+    private lateinit var progressBar: ProgressBar
 
     private var gameId: Int? = null
 
@@ -43,6 +45,7 @@ class GameDetailFragment : Fragment() {
         gameCover = view.findViewById(R.id.game_cover)
         gameReleaseDate = view.findViewById(R.id.game_release_date)
         gamePlatforms = view.findViewById(R.id.game_platforms)
+        progressBar = view.findViewById(R.id.progressBar)
 
         gameId?.let {
             getGameDetails(it)
@@ -50,6 +53,7 @@ class GameDetailFragment : Fragment() {
     }
 
     private fun getGameDetails(gameId: Int) {
+        progressBar.visibility = View.VISIBLE
         lifecycleScope.launch {
             val response: Response<Game> = RetrofitClient.apiService.getGameDetails(gameId)
 
@@ -63,6 +67,7 @@ class GameDetailFragment : Fragment() {
             } else {
                 showError("Error fetching game details")
             }
+            progressBar.visibility = View.GONE
         }
     }
 
